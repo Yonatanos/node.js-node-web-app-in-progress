@@ -19,9 +19,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((request, response, next) => {
-  response.render('./maintainance.hbs');
-});
+
+/* To uncomment the code below when site is under maintainance */
+// app.use((request, response, next) => {
+//   response.render('./maintainance.hbs');
+// });
 
 app.use(express.static(__dirname + '/public'));
 

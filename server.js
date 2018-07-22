@@ -5,29 +5,34 @@ const fs = require('fs');
 const port = process.env.PORT || 3000;
 
 var app = express();  //Creates an app
+
+//Middleware for how to twick express. (method use)
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'hbs');
+
+
 hbs.registerPartials(__dirname + '/views/partials'); // Register partial use option
 hbs.registerHelper('getCurrentYear', () => {
   return new Date().getFullYear();
 });
 
-//Middleware for how to twick express
-app.set('view engine', 'hbs');
 
 app.use((req, res, next) => {
   let now = new Date().toString();
 
   let logMessage = `${now}: ${req.method} ${req.url}`;
-  fs.appendFile('./server.log', logMessage + '\n', (error) => console.log(error));
+  fs.appendFile('./server.log', logMessage + '\n', (error) => {
+    if (error) {
+      console.log(error);
+    };
+  });
   next();
 });
-
 
 /* To uncomment the code below when site is under maintainance */
 // app.use((request, response, next) => {
 //   response.render('./maintainance.hbs');
 // });
-
-app.use(express.static(__dirname + '/public'));
 
 // Handler for get request. argument(url, data to send back)
 app.get('/', (request, response) => {
@@ -58,6 +63,7 @@ app.get('/home', (request, response) => {
 });
 //Bind application to port on maching
 app.listen(port);
+
 /* Optional: callback to do something when getting connection
 app.listen(port, () => {
   console.log('Server is up');

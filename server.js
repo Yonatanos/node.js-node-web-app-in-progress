@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
-const port = process.env.port;
+const port = process.env.PORT || 3000;
 
 var app = express();  //Creates an app
 hbs.registerPartials(__dirname + '/views/partials'); // Register partial use option
@@ -57,9 +57,9 @@ app.get('/home', (request, response) => {
   })
 });
 //Bind application to port on maching
-app.listen(3000);
+app.listen(port);
 /* Optional: callback to do something when getting connection
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Server is up');
 });
 */

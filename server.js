@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.port;
+
 var app = express();  //Creates an app
 hbs.registerPartials(__dirname + '/views/partials'); // Register partial use option
 hbs.registerHelper('getCurrentYear', () => {

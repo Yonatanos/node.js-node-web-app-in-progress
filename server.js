@@ -34,6 +34,8 @@ app.use((req, res, next) => {
 //   response.render('./maintainance.hbs');
 // });
 
+
+//Request handlers
 // Handler for get request. argument(url, data to send back)
 app.get('/', (request, response) => {
   //response.send('<h1>Hello Express!</h1>');
@@ -61,6 +63,14 @@ app.get('/home', (request, response) => {
     welcomeMessage: 'Welcome Home',
   })
 });
+
+app.get('/projects', (request, response) => {
+  response.render('projects', {
+    pageTitle: 'My Projects',
+    welcomeMessage: 'Wellcome ',
+  })
+});
+
 //Bind application to port on maching
 app.listen(port);
 
